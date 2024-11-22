@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../features/product/productSlice";
+import ProductList from "./ProductList";
 
 function ProductForm() {
   let [product, setProduct] = useState({});
+  let [updateId, setUpdateId] = useState("");
 
   const dispatch = useDispatch();
 
@@ -15,10 +17,21 @@ function ProductForm() {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(product));
-    setProduct("");
+    console.log("Submitting product:", product);
+
+    if (updateId === "") {
+      dispatch(addProduct(product));
+    } else {
+      dispatch(updateProduct(product));
+      setUpdateId("");
+    }
+    setProduct({});
   };
 
+  let updateProduct = (product) => {
+    setProduct(product);
+    setUpdateId(product.id);
+  };
   return (
     <>
       <div className="container">
@@ -52,7 +65,7 @@ function ProductForm() {
           </div>
           <div className="mb-3">
             <label className="form-label">
-              <b> Image :</b>
+              <b> Image url:</b>
             </label>
             <input
               type="url"

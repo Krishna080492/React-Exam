@@ -29,6 +29,7 @@ function Navbar() {
                   Product List
                 </Link>
               </li>
+             
             </ul>
             <form className="d-flex">
               <input
