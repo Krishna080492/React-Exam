@@ -31,7 +31,7 @@ function ProductList() {
                 <p className="card-text">{product.category}</p>
               </div>
               <div className="mx-3 mb-3">
-                <button className="btn btn-danger" onClick={()=>dispatch(deleteProducts(id))}>Delete</button>
+                <button className="btn btn-danger" onClick={()=>dispatch(deleteProduct(id))}>Delete</button>
                 <button className="btn btn-warning mx-3">Update</button>
 
               </div>

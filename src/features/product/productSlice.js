@@ -33,7 +33,13 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
-// export const deleteProducts = createAsyncThunk(`${id}`, async () => {});
+export const deleteProduct = createAsyncThunk("products/DeleteProduct", async (id,{rejectWithValue}) => {
+  try {
+    await fetch(`http://localhost:3000/products/${id}`);
+  } catch (error) {
+    return rejectWithValue(error.message);
+  }
+});
 
 const productSlice = createSlice({
   name: "products",
