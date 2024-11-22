@@ -17,7 +17,7 @@ function ProductForm() {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting product:", product);
+    console.log(product);
 
     if (updateId === "") {
       dispatch(addProduct(product));
@@ -91,6 +91,7 @@ function ProductForm() {
             Submit
           </button>
         </form>
+        <ProductList updateProduct={updateProduct}/>
       </div>
     </>
   );

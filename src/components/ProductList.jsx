@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, fetchProducts, updateProduct } from "../features/product/productSlice";
+import { deleteProduct, fetchProducts } from "../features/product/productSlice";
 
-function ProductList({updateProduct}) {
+function ProductList({ updateProduct }) {
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
 
@@ -13,7 +13,6 @@ function ProductList({updateProduct}) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  
   return (
     <div className="container mt-4">
       <h4 className="text-center">Product List</h4>
@@ -38,7 +37,12 @@ function ProductList({updateProduct}) {
                 >
                   Delete
                 </button>
-                <button className="btn btn-warning mx-3" onClick={()=>updateProduct(product)}>Update</button>
+                <button
+                  className="btn btn-warning mx-3"
+                  onClick={() => updateProduct(product)}
+                >
+                  Update
+                </button>
               </div>
             </div>
           </div>

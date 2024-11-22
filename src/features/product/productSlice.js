@@ -113,7 +113,7 @@ const productSlice = createSlice({
         const updatedProduct = action.payload;
       
         // Update the product in the state
-        state.products = state.products.map((product) =>
+        state.products = state.products.filter((product) =>
           product.id === updatedProduct.id ? updatedProduct : product
         );
       })
