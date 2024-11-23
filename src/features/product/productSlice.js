@@ -47,7 +47,7 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
-export const updateProduct = createAsyncThunk(
+export const updateProduct1 = createAsyncThunk(
   "products/updateProduct",
   async (product, { rejectWithValue }) => {
     try {
@@ -55,13 +55,12 @@ export const updateProduct = createAsyncThunk(
         method: "PUT",
         body: JSON.stringify(product),
       });
-      return await res.json(); 
+      return product;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-
 
 const productSlice = createSlice({
   name: "products",
@@ -103,21 +102,31 @@ const productSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(updateProduct.pending, (state) => {
+      .addCase(updateProduct1.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(updateProduct.fulfilled, (state, action) => {
+      .addCase(updateProduct1.fulfilled, (state, action) => {
         state.loading = false;
-      
+
         const updatedProduct = action.payload;
-      
+
         // Update the product in the state
         state.products = state.products.filter((product) =>
-          product.id === updatedProduct.id ? updatedProduct : product
+          // product.id === updatedProduct.id ? updatedProduct : product
+          {
+            let { title, price, image, category } = action.payload;
+            if (product.id == action.payload.id) {
+              product.title = title;
+              product.price = price;
+              product.image = image;
+              product.category = category;
+            }
+            return product;
+          }
         );
       })
-      .addCase(updateProduct.rejected, (state, action) => {
+      .addCase(updateProduct1.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

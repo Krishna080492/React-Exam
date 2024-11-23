@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../features/product/productSlice";
+import { addProduct, updateProduct1 } from "../features/product/productSlice";
 import ProductList from "./ProductList";
 
 function ProductForm() {
@@ -22,7 +22,7 @@ function ProductForm() {
     if (updateId === "") {
       dispatch(addProduct(product));
     } else {
-      dispatch(updateProduct(product));
+      dispatch(updateProduct1(product));
       setUpdateId("");
     }
     setProduct({});
@@ -91,7 +91,7 @@ function ProductForm() {
             Submit
           </button>
         </form>
-        <ProductList updateProduct={updateProduct}/>
+        <ProductList updateProduct={updateProduct} />
       </div>
     </>
   );
